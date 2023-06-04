@@ -87,21 +87,128 @@
     </section>
   </main>
 
-  <script>
-    let form = document.querySelector('form');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-    });
 
-    let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
+  <!-- JSs -->
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({
+      token: "4ede8aac97f24009a6848f3765054369"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+    TrackJS.track('Testing TrackJS!');
+  </script>
+
+  <script>
+    let form = document.querySelector('form')
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      let output = document.querySelector('output')
+      let firstNum = document.querySelector('#first-num').value
+      let secondNum = document.querySelector('#second-num').value
+      let operator = document.querySelector('#operator').value
+      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`)
+    })
+
+    let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'))
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // Get buttons from DOM
+    const consoleLogBtn = errorBtns[0]
+    const consoleErrorBtn = errorBtns[1]
+    const consoleCountBtn = errorBtns[2]
+    const consoleWarnBtn = errorBtns[3]
+    const consoleAssertBtn = errorBtns[4]
+    const consoleClearBtn = errorBtns[5]
+    const consoleDirBtn = errorBtns[6]
+    const consoleDirxmlBtn = errorBtns[7]
+    const consoleGroupStartBtn = errorBtns[8]
+    const consoleGroupEndBtn = errorBtns[9]
+    const consoleTableBtn = errorBtns[10]
+    const startTimerBtn = errorBtns[11]
+    const endTimerBtn = errorBtns[12]
+    const consoleTraceBtn = errorBtns[13]
+    const triggerGlobalErrorBtn = errorBtns[14]
+
+    // Messages to be used in console
+    const consoleLogMsg = 'Console Log Demo'
+    const consoleErrorMsg = 'Console Error Demo'
+    const consoleCountMsg = 'Console Count Demo'
+    const consoleWarnMsg = 'Console Warn Demo'
+    const consoleAssertMsg = 'Console Assert Demo'
+    const consoleClearMsg = 'Console Clear Demo'
+    const consoleDirMsg = 'Console Dir Demo'
+    const consoleDirxmlMsg = 'Console Dirxml Demo'
+    const consoleGroupStartMsg = 'Console Group Start Demo'
+    const consoleGroupEndMsg = 'Console Group End Demo'
+    const consoleTableMsg = [
+      { name: 'Software Engineering', num: 110 },
+      { name: 'Operation System', num: 120 },
+      { name: 'Algorithm', num: 101 },
+    ]
+    const consoleTraceMsg = 'Console Trace Demo'
+    const triggerGlobalErrorMsg = 'Trigger Global Error Demo'
+
+    // Actions for console testing
+    let timer = null
+    const startTimerMsg = () => {
+      timer = new Date().getTime()
+      console.log(`Start Timer Demo: ${timer}`)
+    }
+    const endTimerMsg = () => {
+      const end = new Date().getTime()
+      console.log(`End Timer Demo: ${end - timer}ms`)
+    }
+
+    const triggerGlobalError = () => {
+      throw new Error(triggerGlobalErrorMsg)
+    }
+
+    // Step 2 - Adding Buttons for Console Testing
+    consoleLogBtn?.addEventListener('click', () => console.log(consoleLogMsg))
+    consoleErrorBtn?.addEventListener('click', () => console.error(consoleErrorMsg))
+    consoleCountBtn?.addEventListener('click', () => console.count(consoleCountMsg))
+    consoleWarnBtn?.addEventListener('click', () => console.warn(consoleWarnMsg))
+    consoleAssertBtn?.addEventListener('click', () => console.assert(false, consoleAssertMsg))
+    consoleClearBtn?.addEventListener('click', () => console.clear())
+    consoleDirBtn?.addEventListener('click', () => console.dir(consoleDirMsg))
+    consoleDirxmlBtn?.addEventListener('click', () => console.dirxml(consoleDirxmlMsg))
+    consoleGroupStartBtn?.addEventListener('click', () => console.group(consoleGroupStartMsg))
+    consoleGroupEndBtn?.addEventListener('click', () => console.groupEnd(consoleGroupEndMsg))
+    consoleTableBtn?.addEventListener('click', () => console.table(consoleTableMsg))
+    startTimerBtn?.addEventListener('click', startTimerMsg)
+    endTimerBtn?.addEventListener('click', () => endTimerMsg())
+    consoleTraceBtn?.addEventListener('click', () => console.trace(consoleTraceMsg))
+    triggerGlobalErrorBtn?.addEventListener('click', () => triggerGlobalError())
+
+    // Step 3 - Trying Try/Catch/Finally
+    const tryCatchFinallyBtn = null
+
+    try {
+      tryCatchFinallyBtn.addEventListener('click', () => console.log('Try/Catch/Finally Demo'))
+
+      // Step 4 - Trying Throw
+      throw new EvalError('Throw Demo')
+    } catch (e) {
+      if (e instanceof TypeError) {
+        console.log('❌ TypeError: No such a button')
+        console.log(`➡️ Error At: ${e.stack}`)
+      }
+    } finally {
+      console.log('Finally Demo')
+    }
+
+    // Step 4 - Trying Throw
+    try {
+      throw new EvalError('Throw Demo')
+    } catch (e) {
+      if (e instanceof EvalError) {
+        console.log('❌ EvalError: No such a button')
+        console.log(`➡️ Error At: ${e.stack}`)
+      }
+    }
+
   </script>
 </body>
 
