@@ -95,7 +95,7 @@
       token: "4ede8aac97f24009a6848f3765054369"
       // for more configuration options, see https://docs.trackjs.com
     });
-    TrackJS.track('Testing TrackJS!');
+    // TrackJS.track('Testing TrackJS!');
   </script>
 
   <script>
@@ -163,6 +163,7 @@
 
     const triggerGlobalError = () => {
       throw new Error(triggerGlobalErrorMsg)
+      TrackJS.track('Global Error Triggered')
     }
 
     // Step 2 - Adding Buttons for Console Testing
@@ -194,6 +195,8 @@
       if (e instanceof TypeError) {
         console.log('❌ TypeError: No such a button')
         console.log(`➡️ Error At: ${e.stack}`)
+        console.error(e)
+        TrackJS.track(e)
       }
     } finally {
       console.log('Finally Demo')
@@ -206,6 +209,7 @@
       if (e instanceof EvalError) {
         console.log('❌ EvalError: No such a button')
         console.log(`➡️ Error At: ${e.stack}`)
+        TrackJS.track(e)
       }
     }
 
