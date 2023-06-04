@@ -213,6 +213,19 @@
       }
     }
 
+    // Global Error Handler
+    window.onerror = (msg, url, lineNo, columnNo, error) => {
+      console.log('Global Error Handler Demo')
+      console.log(`
+        ➡️ Error At: ${error.stack}
+        ➡️ Error Message: ${msg}
+        ➡️ Error URL: ${url}
+        ➡️ Error Line Number: ${lineNo}
+        ➡️ Error Column Number: ${columnNo}
+      `)
+      TrackJS.track(error)
+    }
+
   </script>
 </body>
 
