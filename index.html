@@ -147,20 +147,31 @@
       { name: 'Operation System', num: 120 },
       { name: 'Algorithm', num: 101 },
     ]
-    const consoleTraceMsg = 'Console Trace Demo'
     const triggerGlobalErrorMsg = 'Trigger Global Error Demo'
 
     // Actions for console testing
+    // Timer
     let timer = null
     const startTimerMsg = () => {
       timer = new Date().getTime()
       console.log(`Start Timer Demo: ${timer}`)
     }
+
     const endTimerMsg = () => {
       const end = new Date().getTime()
       console.log(`End Timer Demo: ${end - timer}ms`)
     }
 
+    // Tracing
+    const consoleTraceMsg = () => {
+
+      const deep = () => { deeper() }
+      const deeper = () => { deepest() }
+      const deepest = () => { console.trace('Console Trace Demo') }
+      deep()
+    }
+
+    // Global Error
     const triggerGlobalError = () => {
       throw new Error(triggerGlobalErrorMsg)
       TrackJS.track('Global Error Triggered')
@@ -180,7 +191,7 @@
     consoleTableBtn?.addEventListener('click', () => console.table(consoleTableMsg))
     startTimerBtn?.addEventListener('click', startTimerMsg)
     endTimerBtn?.addEventListener('click', () => endTimerMsg())
-    consoleTraceBtn?.addEventListener('click', () => console.trace(consoleTraceMsg))
+    consoleTraceBtn?.addEventListener('click', () => consoleTraceMsg())
     triggerGlobalErrorBtn?.addEventListener('click', () => triggerGlobalError())
 
     // Step 3 - Trying Try/Catch/Finally
